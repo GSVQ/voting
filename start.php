@@ -16,7 +16,7 @@ function voting_init() {
 	//elgg_register_js('flot', "mod/voting/vendors/jquery.flot.js");
 	//elgg_register_js('flot:pie', "mod/voting/vendors/jquery.flot.pie.js");
 	
-	elgg_register_js('chartjs', "mod/voting/vendors/Chart.js/Chart.js");
+	elgg_register_js('chartjs', "mod/voting/lib/chartjs/Chart.js");
 	// Register a script to handle (usually) a POST request (an action)
 	$base_dir = elgg_get_plugins_path() . 'voting/actions/voting';
 	elgg_register_action('voting/edit', "$base_dir/edit.php");
