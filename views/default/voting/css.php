@@ -74,3 +74,7 @@
     background-color: mistyrose;
     padding: 10px;
 }
+
+.elgg-form.elgg-form-voting-vote {
+    clear: both;
+}

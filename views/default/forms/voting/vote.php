@@ -18,7 +18,7 @@ foreach ($options as $option_field_n => $option) {
 $rand_radio = shuffle_assoc($radio);
 
 if ($num_choices == 1) {
-echo "<br/><br/><div><label>";
+echo "<div><label>";
 echo elgg_echo("voting:vote:an:option");
 echo "</label></div>";
 
@@ -34,7 +34,7 @@ echo "<div>";
 	
 	echo "</div>";
 } else {
-	echo "<br/><br/><div><label>";
+	echo "<div><label>";
 	echo elgg_echo("voting:vote:n:options", array($num_choices));
 	echo "</label></div>";
 	
