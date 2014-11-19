@@ -3,4 +3,6 @@ Limpiar código, sobre toro en voting/object
 Votaciones condorcet
 Modificar views para el listado
 Agregar css a fields en fullview
+Agregar campos opcionales a opciones Descripción detallada, archivos adjuntos, link
+Agregar opción despleglable en votaciones para "cambiar voto", "auditoria"
 ...

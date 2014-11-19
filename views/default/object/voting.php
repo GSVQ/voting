@@ -147,17 +147,17 @@ if ($full) {
 	if (voting_is_not_started_or_no_votes($voting)) {
 		
 	} else {
-	
-		$body .= elgg_view('voting/results', $vote_vals);	
-		
-		if ($voting->auditory == 'on') {
-			$body .= '<br><h3>' . elgg_echo('auditory:auditory') . '</h3>';
-			$body .= elgg_list_annotations(array(
-				'guid' => $voting->guid,
-				'annotation_name' => 'votes', 
-				//'annotation_owner_guid' => $user_guid,
-				'limit' => 10,
-				));
+		if ($voting->show_live_result == 'on' || voting_is_ended($voting)) {
+			$body .= elgg_view('voting/results', $vote_vals);	
+			if ($voting->auditory == 'on') {
+				$body .= '<br><h3>' . elgg_echo('auditory:auditory') . '</h3>';
+				$body .= elgg_list_annotations(array(
+					'guid' => $voting->guid,
+					'annotation_name' => 'votes', 
+					//'annotation_owner_guid' => $user_guid,
+					'limit' => 10,
+					));
+			}
 		}
 	}
 	$params = array(

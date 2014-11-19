@@ -219,6 +219,19 @@ function voting_is_open($voting) {
 	}
 	
 }
+function voting_is_ended($voting) {
+	$closed = $voting->closed;
+	$end_date = $voting->end_date;
+	$end_date_ts = strtotime($end_date);
+	$now_ts = time();
+	if ($closed) {
+		return true;
+	} else if  ($end_date && $end_date_ts < $now_ts) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 function voting_is_not_started_or_no_votes($voting) {
 	$start_date = $voting->start_date;
