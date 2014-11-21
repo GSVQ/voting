@@ -78,3 +78,13 @@
 .elgg-form.elgg-form-voting-vote {
     clear: both;
 }
+
+
+.voting-subtitle > li {
+    float: left;
+    font-size-adjust: 0.65;
+    font-style: initial;
+    min-width: 300px;
+    padding-top: 5px;
+   
+}

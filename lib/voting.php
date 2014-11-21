@@ -297,6 +297,82 @@ function voting_user_can_vote($voting) {
 	}
 }
 
+// Control views: Decide if show or not some views
+
+function voting_control_view_fields($voting) {
+	return true;
+}
+
+function voting_control_view_description($voting) {
+	return true;
+}
+
+function voting_control_view_open_close_button($voting) {
+	$user_guid = elgg_get_logged_in_user_guid();
+	if (($user_guid == $voting->owner_guid || elgg_is_admin_logged_in()) && !$voting->end_date) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function voting_control_view_vote_options($voting) {
+	if (voting_is_open($voting) && voting_user_can_vote($voting)) {
+		return true;
+	} else {
+		return false;
+	}	
+}
+
+function voting_control_show_or_not_results($voting){
+	if (!voting_is_not_started_or_no_votes($voting) && ($voting->show_live_result == 'on' || voting_is_ended($voting))) {
+		return true;
+	} else {
+		return false;
+	}
+}
+		
+
+
+
+// prepare views: get data for views
+function voting_prepare_fields($voting) {
+	$display_fields = array(	
+		'information_link' => 'url',
+		'num_choices' => 'text',
+		'auditory' => 'text',
+		'show_live_result' => 'text',
+		'start_date' => 'date',
+		'end_date' => 'date',
+		);
+	return $display_fields;
+	
+}
+
+function voting_prepare_description($voting) {
+	$return['description'] = $voting->description;
+	return $return;
+}
+
+function voting_prepare_open_close_button($voting) {
+	if ($voting->closed) {
+		$return['action_url'] = 'action/voting/open?guid=' . $voting->getGUID();
+		$return['text'] = elgg_echo('voting:open');
+		$return['confirm'] = elgg_echo('voting:openwarning');
+		$return['class'] = 'elgg-button elgg-button-green float-alt';
+					
+	}else {
+		$return['action_url'] = 'action/voting/close?guid=' . $voting->getGUID();
+		$return['text'] = elgg_echo('voting:close');
+		$return['confirm'] = elgg_echo('voting:closewarning');
+		$return['class'] = 'elgg-button elgg-button-delete float-alt';			 	
+		
+	}
+	return $return;
+}
+
+
+	
 
 
 

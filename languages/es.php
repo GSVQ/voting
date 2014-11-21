@@ -58,6 +58,12 @@ $mapping = array(
 	'auditory:auditory' => 'Auditoría de recuento',
 	'voting:vote:n:options:not:access' => 'No puedes votar en esta votación, si quieres participar comprueba que estás logueado y que perteneces al grupo donde se abrió la votación, si aún así sigue apareciendo este mensaje, consulta con los administradores del sitio',
 	'voting:error:not:permissions' => 'Error: No puedes votar en esta votación',
+	'voting:legend:votes' => 'Votos',
+	'voting:legend:percent' => 'Porcentaje',
+	'voting:yes:auditory' => 'Si',
+	'voting:no:auditory' => 'No',
+	'voting:no:show_live_result' => 'No',
+	'voting:yes:show_live_result' => 'Si',
 
 	/**
 	 * River

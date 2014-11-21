@@ -58,6 +58,7 @@ if ($comments_count != 0 && !$revision) {
 
 $subtitle = "$editor_text $comments_link $categories";
 
+
 // do not show the metadata and controls in widget view
 if (!elgg_in_context('widgets')) {
 	// Regular entity menu
@@ -70,96 +71,45 @@ if (!elgg_in_context('widgets')) {
 }
 
 
-if ($full) {
-	$body .= '<b>' . elgg_echo('voting:description') . '</b><br/>';
-	$body .= elgg_view('output/longtext', array('value' => $voting->description)) . '<br/>';
-	$display_fields = array(	
-		'information_link' => 'url',
-		'num_choices' => 'text',
-		'auditory' => 'text',
-		'show_live_result' => 'text',
-		'start_date' => 'date',
-		'end_date' => 'date',
-		);
+if ($full) {	
 	
-	foreach ($display_fields as $name => $type) {
-		if ($name == 'end_date' && !$voting->end_date) {
-			$body .= '<b>' . elgg_echo("voting:label:$name") . ': </b>';
-			$body .= elgg_view("output/$type", array('value' => elgg_echo('voting:manual:control'))) . '<br>';	
-		} else {
-			$body .= '<b>' . elgg_echo("voting:label:$name") . ': </b>';
-			$body .= elgg_view("output/$type", array('value' => $voting->$name)) . '<br>';	
-		}	
+	if (voting_control_view_fields($voting)) {
+		$views_options_fields = voting_prepare_fields($voting);
+		$subtitle .= elgg_view('voting/fields', array(
+			'entity' => $voting,
+			'views_options' => $views_options_fields
+		));
 	}
+		
+	if (voting_control_view_description($voting)) {
+		$views_options_description = voting_prepare_description($voting);
+		$body .= elgg_view('voting/description', array(
+			'entity' => $voting,
+			'views_options' => $views_options_description
+		));
+	}	 	
 	
-	$user_guid = elgg_get_logged_in_user_guid();
-	if (($user_guid == $voting->owner_guid || elgg_is_admin_logged_in()) && !$voting->end_date) {
-		if ($voting->closed) {
-			$open_url = 'action/voting/open?guid=' . $voting->getGUID();
-			$body .= elgg_view('output/confirmlink', array(
-				'text' => elgg_echo('voting:open'),
-				'href' => $open_url,
-				'confirm' => elgg_echo('voting:openwarning'),
-				'class' => 'elgg-button elgg-button-green float-alt',
-			));
-			
-		}else { 	
-			$close_url = 'action/voting/close?guid=' . $voting->getGUID();
-			$body .= elgg_view('output/confirmlink', array(
-				'text' => elgg_echo('voting:close'),
-				'href' => $close_url,
-				'confirm' => elgg_echo('voting:closewarning'),
-				'class' => 'elgg-button elgg-button-delete float-alt',
-			));
-		}
+	if (voting_control_view_open_close_button($voting)) {
+		$views_options_open_close_button = voting_prepare_open_close_button($voting);
+		$body .= elgg_view('voting/open_close_button', array(
+			'views_options' => $views_options_open_close_button
+		));
 	}
-	
-	
 		
 	$vote_vals = voting_prepare_vote_form_vars($voting);
-	$vote_access_id = $voting->vote_access_id;
-	$access_colection = get_access_array($user_guid);
-	
-	//print_r($access_colection);
-	//print_r($vote_access_id);
-	//print_r($members);
-	if (voting_is_open($voting) && voting_user_can_vote($voting)) {
+	if (voting_control_view_vote_options($voting)) {		
 		$body .= elgg_view_form('voting/vote', array(), $vote_vals); 
 	} else {
 		$body .= elgg_view('voting/options', $vote_vals); 
 	}
-	$votes = elgg_get_annotations(array(
-				'guid' => $voting->guid,
-				'annotation_name' => 'votes', 
-				//'annotation_owner_guid' => $user_guid,
-				'limit' => 0,
-				));
-	//print_r($votes);
-	$variables = elgg_get_config('voting');
 	
-	/* 
-	 * Para imprimir todo lo guardado DEBUG
-	foreach ($variables as $name => $type) {
-		$body .= "$name" . ':' . $voting->$name . '<br>';
-		
-	}
-	*/ 
-	if (voting_is_not_started_or_no_votes($voting)) {
-		
-	} else {
-		if ($voting->show_live_result == 'on' || voting_is_ended($voting)) {
-			$body .= elgg_view('voting/results', $vote_vals);	
-			if ($voting->auditory == 'on') {
-				$body .= '<br><h3>' . elgg_echo('auditory:auditory') . '</h3>';
-				$body .= elgg_list_annotations(array(
-					'guid' => $voting->guid,
-					'annotation_name' => 'votes', 
-					//'annotation_owner_guid' => $user_guid,
-					'limit' => 10,
-					));
-			}
+	if (voting_control_show_or_not_results($voting)) {
+		$body .= elgg_view('voting/results', $vote_vals);
+		if ($voting->auditory == 'on') {
+			$body .= elgg_view('voting/auditory', array('entity' => $voting));
 		}
 	}
+	
 	$params = array(
 		'entity' => $voting,
 		'metadata' => $metadata,

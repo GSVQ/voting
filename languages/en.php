@@ -58,6 +58,13 @@ $mapping = array(
 	'auditory:auditory' => 'Auditory',
 	'voting:vote:n:options:not:access' => 'You can\'t vote in this poll, contact with administrators for more information',
 	'voting:error:not:permissions' => 'You can\'t vote in this poll',
+	'voting:legend:votes' => 'Votes',
+	'voting:legend:percent' => 'Percent',
+	'voting:yes:auditory' => 'Yes',
+	'voting:no:auditory' => 'No',
+	'voting:no:show_live_result' => 'No',
+	'voting:yes:show_live_result' => 'Yes',
+	
 	/**
 	 * River
 	 */
