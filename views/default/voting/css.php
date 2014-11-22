@@ -84,7 +84,37 @@
     float: left;
     font-size-adjust: 0.65;
     font-style: initial;
-    min-width: 300px;
+    min-width: 335px;
     padding-top: 5px;
    
+}
+
+.voting-options-sortable {
+	
+	/*background-image: url(<?php echo elgg_get_site_url() . "mod/voting/images/mover.png" ; ?>);*/
+	background-position: 10px;
+	background-repeat: no-repeat;
+	margin: 10px;
+	
+	cursor: move;
+		
+}
+
+.voting-options-sortable:hover {
+	/*background-image: url(<?php echo elgg_get_site_url() . "mod/voting/images/mover2.png" ; ?>);*/
+	color: #4690D6;	
+}
+
+.move-icon-span {
+	width: 40px;
+	height: 20px;
+	background-image: url(<?php echo elgg_get_site_url() . "mod/voting/images/mover.png" ; ?>);
+	background-position: 10px;
+	background-repeat: no-repeat;
+	margin-right: 20px;
+	display: inline-block;
+}
+
+.move-icon-span:hover {
+	background-image: url(<?php echo elgg_get_site_url() . "mod/voting/images/mover2.png" ; ?>);
 }

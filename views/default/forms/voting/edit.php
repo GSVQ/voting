@@ -64,7 +64,7 @@ foreach ($variables as $name => $type) {
 					));
 					
 				?>
-				<label><?php echo elgg_echo("voting:$name") ?></label>
+				<label><?php echo elgg_echo("voting:$name"); ?></label>
 				
 				
 			</div>
@@ -74,7 +74,7 @@ foreach ($variables as $name => $type) {
 			?>
 			<div>
 				
-				<label><?php echo elgg_echo("voting:$name") ?></label>	
+				<label><?php echo elgg_echo("voting:$name"); ?></label>	
 				<?php
 					
 					echo elgg_view($input_view, array(
@@ -89,6 +89,29 @@ foreach ($variables as $name => $type) {
 			</div>
 			<?php
 			break;
+		case 'dropdown':
+			?>
+			<div>
+				
+				<label><?php echo elgg_echo("voting:$name");  ?></label>	
+				<?php
+					
+					echo elgg_view($input_view, array(
+						'name' => $name,
+						'value' => $vars[$name],
+						'options_values' => array(
+							'normal' => elgg_echo('voting:type:normal'),
+							'condorcet' => elgg_echo('voting:type:condorcet'),
+						),
+					));
+				?>
+
+				
+			</div>
+			<?php
+			break;
+			
+			
 		default:
 			?>
 			<div>

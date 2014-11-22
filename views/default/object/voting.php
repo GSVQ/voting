@@ -97,8 +97,12 @@ if ($full) {
 	}
 		
 	$vote_vals = voting_prepare_vote_form_vars($voting);
-	if (voting_control_view_vote_options($voting)) {		
-		$body .= elgg_view_form('voting/vote', array(), $vote_vals); 
+	if (voting_control_view_vote_options($voting)) {
+		if ($voting->voting_type == 'condorcet') {
+			$body .= elgg_view_form('voting/condorcet_vote', array(), $vote_vals);
+		} else {		
+			$body .= elgg_view_form('voting/vote', array(), $vote_vals); 
+		}
 	} else {
 		$body .= elgg_view('voting/options', $vote_vals); 
 	}

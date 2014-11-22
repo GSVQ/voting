@@ -64,6 +64,10 @@ $mapping = array(
 	'voting:no:auditory' => 'No',
 	'voting:no:show_live_result' => 'No',
 	'voting:yes:show_live_result' => 'Yes',
+	'voting:voting_type' => 'Votation type',
+	'voting:type:normal' => 'Normal',
+	'voting:type:condorcet' => 'Preferential',
+	'voting:label:voting_type' => 'Votation type',
 	
 	/**
 	 * River

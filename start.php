@@ -47,6 +47,7 @@ function voting_init() {
 		'description' => 'longtext',
 		'information_link' => 'url',
 		'tags' => 'tags',
+		'voting_type' => 'dropdown',
 		'options' => 'auto_add_text',
 		'num_choices' => 'integer',
 		'access_id' => 'access',

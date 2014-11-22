@@ -36,6 +36,16 @@ echo '<ul class="voting-subtitle">';
 				echo elgg_view("output/$type", array('value' => elgg_echo('voting:yes:show_live_result'))) . '</li>';
 			}
 			
+		} else if ($name == 'voting_type') {
+			if ($voting->voting_type == 'condorcet') {
+				echo '<li><b>' . elgg_echo("voting:label:$name") . ': </b>';
+				echo elgg_view("output/$type", array('value' => elgg_echo('voting:type:condorcet'))) . '</li>';
+			} else {
+				echo '<li><b>' . elgg_echo("voting:label:$name") . ': </b>';
+				echo elgg_view("output/$type", array('value' => elgg_echo('voting:type:normal'))) . '</li>';
+				
+			}
+			
 		} else if (!$voting->$name) {
 		
 		} else {

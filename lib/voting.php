@@ -18,6 +18,7 @@ function voting_prepare_form_vars($voting = null) {
 		'description' => '',
 		'information_link' => 'http://',		
 		'tags' => '',
+		'voting_type' => 'notmal',
 		'access_id' => ACCESS_DEFAULT,
 		'vote_access_id' => ACCESS_DEFAULT,
 		'container_guid' => elgg_get_page_owner_guid(),
@@ -304,7 +305,11 @@ function voting_control_view_fields($voting) {
 }
 
 function voting_control_view_description($voting) {
-	return true;
+	if($vote->description){
+		return true;
+	} else {
+		return false;
+	}
 }
 
 function voting_control_view_open_close_button($voting) {
@@ -339,6 +344,7 @@ function voting_control_show_or_not_results($voting){
 function voting_prepare_fields($voting) {
 	$display_fields = array(	
 		'information_link' => 'url',
+		'voting_type' => 'text',
 		'num_choices' => 'text',
 		'auditory' => 'text',
 		'show_live_result' => 'text',

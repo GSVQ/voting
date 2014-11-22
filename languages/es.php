@@ -64,11 +64,15 @@ $mapping = array(
 	'voting:no:auditory' => 'No',
 	'voting:no:show_live_result' => 'No',
 	'voting:yes:show_live_result' => 'Si',
+	'voting:voting_type' => 'Tipo de votación',
+	'voting:type:normal' => 'Normal',
+	'voting:type:condorcet' => 'Preferencial',
+	'voting:label:voting_type' => 'Tipo de votación',
 
 	/**
 	 * River
 	 */
-	'river:create:object:voting' => '%s ha creado una %s', 
+	'river:create:object:voting' => '%s ha creado una votación %s', 
 	
 	/**
 	 * Widgets
